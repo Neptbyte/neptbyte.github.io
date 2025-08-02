@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neptbyte's Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-flex">
+      <h1>Neptbyte's Projects</h1>
+      <div class="header-right">
+        <input type="text" id="project-search" placeholder="Search projects..." aria-label="Search projects" />
+        <nav id="main-nav">
+          <ul>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="https://github.com/Neptbyte" target="_blank">GitHub</a></li>
+          </ul>
+        </nav>
+        <button id="hamburger" aria-label="Toggle menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
+  <main>
+    <section id="projects" class="projects container">
+      <h2>Featured Projects</h2>
+      <div class="project-list" id="project-list">
+        <!-- Example project cards (edit/add your own) -->
+        <div class="project-card">
+          <h3>Awesome Project</h3>
+          <p>A brief description of your project goes here. Highlight what it does and why it's cool.</p>
+          <a href="https://github.com/Neptbyte/awesome-project" class="btn" target="_blank">View on GitHub</a>
+        </div>
+        <div class="project-card">
+          <h3>Next Big Thing</h3>
+          <p>Describe another project. You can add as many cards as you like!</p>
+          <a href="https://github.com/Neptbyte/next-big-thing" class="btn" target="_blank">View on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about container">
+      <h2>About Me</h2>
+      <p>
+        Hi, I'm Neptbyte! I love creating and sharing open-source projects. Connect with me through my <a href="https://github.com/Neptbyte" target="_blank">GitHub</a> or check out my work below.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Neptbyte. Built for GitHub Pages.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
