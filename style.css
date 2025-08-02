@@ -1,0 +1,231 @@
+:root {
+  --primary: #212a3e;
+  --secondary: #394867;
+  --accent: #f1f6f9;
+  --highlight: #9ba4b5;
+  --radius: 12px;
+  --shadow: 0 2px 8px rgba(33, 42, 62, 0.1);
+  --font-main: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.header {
+  background: var(--primary);
+  color: var(--accent);
+  padding: 1.5rem 0;
+  box-shadow: var(--shadow);
+}
+
+.header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+#project-search {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 1rem;
+  background: var(--accent);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  min-width: 170px;
+  margin-right: 1rem;
+}
+
+#project-search:focus {
+  outline: 2px solid var(--highlight);
+}
+
+#main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+#main-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+#main-nav a:hover {
+  color: var(--highlight);
+}
+
+#hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  z-index: 10;
+}
+
+#hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--accent);
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+  .header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-right {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  #project-search {
+    min-width: 100px;
+    width: 110px;
+    margin-right: 0;
+  }
+  #main-nav {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: var(--primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 170px;
+    padding: 0.5rem 0;
+    display: none;
+    flex-direction: column;
+    z-index: 9;
+  }
+  #main-nav.active {
+    display: flex;
+  }
+  #main-nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    padding-right: 1.5rem;
+  }
+  #hamburger {
+    display: flex;
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.projects {
+  margin: 2rem 0;
+}
+
+.project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--secondary);
+  color: var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  flex: 1 1 300px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 220px;
+  transition: opacity 0.2s;
+}
+
+.project-card h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.project-card p {
+  flex: 1;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--highlight);
+  color: var(--primary);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: var(--accent);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.about {
+  margin: 2rem 0;
+  background: var(--secondary);
+  color: var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.about a {
+  color: var(--highlight);
+  text-decoration: underline;
+}
+
+.footer {
+  background: var(--primary);
+  color: var(--accent);
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* Responsive for project cards */
+@media (max-width: 700px) {
+  .project-list {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .container {
+    width: 97%;
+  }
+}
