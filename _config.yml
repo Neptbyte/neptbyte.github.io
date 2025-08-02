@@ -3,7 +3,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-include-cache
- author:
+author:
   name: "NehalAditya"
   avatar: "/assets/images/bio-photo.jpg" # a picture of you
   bio: "A short bio about yourself."
@@ -12,4 +12,5 @@ plugins:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/Nehal-aditya"
+
 
