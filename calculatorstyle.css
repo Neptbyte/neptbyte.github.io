@@ -1,0 +1,114 @@
+/* General Styling */
+:root {
+    --bg-color: #2c3e50;
+    --calc-bg: #34495e;
+    --display-bg: #22303d;
+    --text-color: #ecf0f1;
+    --op-color: #e67e22;
+    --func-color: #5d6d7e;
+    --number-color: #ecf0f1;
+    --btn-bg: #4c627a;
+    --btn-hover-bg: #63809c;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Calculator Container */
+.calculator-container {
+    width: 380px;
+    background: var(--calc-bg);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+/* Display */
+.display {
+    background: var(--display-bg);
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: right;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.display .history {
+    font-size: 1.2rem;
+    color: #95a5a6;
+    min-height: 1.2em;
+}
+
+.display .current-operand {
+    font-size: 2.8rem;
+    font-weight: 300;
+    min-height: 1.5em;
+}
+
+/* Buttons Grid */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+button {
+    border: none;
+    background: var(--btn-bg);
+    color: var(--text-color);
+    padding: 20px 0;
+    font-size: 1.8rem;
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: var(--btn-hover-bg);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button[data-number] {
+    background: var(--btn-bg);
+}
+
+button[data-operation] {
+    background: var(--op-color);
+}
+
+button[data-function] {
+    background: var(--func-color);
+    font-size: 1.2rem;
+}
+
+button[data-equals] {
+    background: #27ae60;
+}
+
+.span-2 {
+    grid-column: span 2;
+}
+
+/* Responsive Design */
+@media (max-width: 420px) {
+    .calculator-container {
+        width: 90%;
+    }
+}
