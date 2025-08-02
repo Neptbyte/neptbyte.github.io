@@ -3,4 +3,13 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-include-cache
- 
+ author:
+  name: "Your Name"
+  avatar: "/assets/images/bio-photo.jpg" # a picture of you
+  bio: "A short bio about yourself."
+  location: "Your Location"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/Nehal-aditya"
+
