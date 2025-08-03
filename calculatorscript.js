@@ -1,313 +1,137 @@
-class Calculator {
-    constructor(historyTextElement, currentOperandTextElement) {
-        this.historyTextElement = historyTextElement;
-        this.currentOperandTextElement = currentOperandTextElement;
-        this.clear();
-    }
+const display = document.getElementById('display');
+const buttons = document.querySelector('.buttons');
+let expression = '';
+let lastAns = 0;
 
-    clear() {
-        this.currentOperand = '0';
-        this.history = '';
-        this.operation = undefined;
-    }
-
-    delete() {
-        if (this.currentOperand === '0') return;
-        this.currentOperand = this.currentOperand.toString().slice(0, -1);
-        if (this.currentOperand === '' || this.currentOperand === '-') {
-            this.currentOperand = '0';
-        }
-    }
-
-    appendNumber(number) {
-        if (number === '.' && this.currentOperand.includes('.')) return;
-        if (this.currentOperand === '0' && number !== '.') {
-            this.currentOperand = number.toString();
-        } else {
-            this.currentOperand = this.currentOperand.toString() + number.toString();
-        }
-    }
-
-    chooseOperation(operation) {
-        if (this.currentOperand === '0' && this.history === '') return;
-        if (this.history !== '') {
-            this.compute();
-        }
-        this.operation = operation;
-        this.history = this.currentOperand;
-        this.currentOperand = '0';
-    }
-
-    chooseFunction(func) {
-        const value = parseFloat(this.currentOperand);
-        if (isNaN(value)) return;
-        let result;
-
-        switch (func) {
-            case 'sin':
-                // JavaScript's Math.sin uses radians, so we convert degrees to radians.
-                result = Math.sin(value * (Math.PI / 180));
-                break;
-            case 'cos':
-                result = Math.cos(value * (Math.PI / 180));
-                break;
-            case 'tan':
-                result = Math.tan(value * (Math.PI / 180));
-                break;
-            case 'log':
-                result = Math.log10(value);
-                break;
-            case '√':
-                result = Math.sqrt(value);
-                break;
-            case '%':
-                result = value / 100;
-                break;
-            default:
-                return;
-        }
-        this.currentOperand = result.toString();
-        this.updateDisplay();
-    }
-
-    compute() {
-        let computation;
-        const prev = parseFloat(this.history);
-        const current = parseFloat(this.currentOperand);
-        if (isNaN(prev) || isNaN(current)) return;
-
-        switch (this.operation) {
-            case '+':
-                computation = prev + current;
-                break;
-            case '-':
-                computation = prev - current;
-                break;
-            case '*':
-                computation = prev * current;
-                break;
-            case '÷':
-                computation = prev / current;
-                break;
-            case '^':
-                computation = Math.pow(prev, current);
-                break;
-            default:
-                return;
-        }
-        this.currentOperand = computation.toString();
-        this.operation = undefined;
-        this.history = '';
-    }
-
-    updateDisplay() {
-        this.currentOperandTextElement.innerText = this.currentOperand;
-        if (this.operation != null) {
-            this.historyTextElement.innerText = `${this.history} ${this.operation}`;
-        } else {
-            this.historyTextElement.innerText = '';
-        }
-    }
+function updateDisplay(val) {
+  display.textContent = val;
 }
 
-const numberButtons = document.querySelectorAll('[data-number]');
-const operationButtons = document.querySelectorAll('[data-operation]');
-const functionButtons = document.querySelectorAll('[data-function]');
-const equalsButton = document.querySelector('[data-equals]');
-const historyTextElement = document.querySelector('.history');
-const currentOperandTextElement = document.querySelector('.current-operand');
-
-const calculator = new Calculator(historyTextElement, currentOperandTextElement);
-
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.appendNumber(button.innerText);
-        calculator.updateDisplay();
-    });
-});
-
-operationButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.chooseOperation(button.innerText);
-        calculator.updateDisplay();
-    });
-});
-
-equalsButton.addEventListener('click', button => {
-    calculator.compute();
-    calculator.updateDisplay();
-});
-
-functionButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const func = button.innerText;
-        if (func === 'C') {
-            calculator.clear();
-        } else if (func === 'DEL') {
-            calculator.delete();
-        } else if (func === 'π') {
-            calculator.currentOperand = Math.PI.toString();
-        } else {
-            calculator.chooseFunction(func);
-        }
-        calculator.updateDisplay();
-    });
-});
-
-class Calculator {
-    constructor(historyTextElement, currentOperandTextElement) {
-        this.historyTextElement = historyTextElement;
-        this.currentOperandTextElement = currentOperandTextElement;
-        this.clear();
-    }
-
-    clear() {
-        this.currentOperand = '0';
-        this.history = '';
-        this.operation = undefined;
-    }
-
-    delete() {
-        if (this.currentOperand === '0') return;
-        this.currentOperand = this.currentOperand.toString().slice(0, -1);
-        if (this.currentOperand === '' || this.currentOperand === '-') {
-            this.currentOperand = '0';
-        }
-    }
-
-    appendNumber(number) {
-        if (number === '.' && this.currentOperand.includes('.')) return;
-        if (this.currentOperand === '0' && number !== '.') {
-            this.currentOperand = number.toString();
-        } else {
-            this.currentOperand = this.currentOperand.toString() + number.toString();
-        }
-    }
-
-    chooseOperation(operation) {
-        if (this.currentOperand === '0' && this.history === '') return;
-        if (this.history !== '') {
-            this.compute();
-        }
-        this.operation = operation;
-        this.history = this.currentOperand;
-        this.currentOperand = '0';
-    }
-
-    chooseFunction(func) {
-        const value = parseFloat(this.currentOperand);
-        if (isNaN(value)) return;
-        let result;
-
-        switch (func) {
-            case 'sin':
-                // JavaScript's Math.sin uses radians, so we convert degrees to radians.
-                result = Math.sin(value * (Math.PI / 180));
-                break;
-            case 'cos':
-                result = Math.cos(value * (Math.PI / 180));
-                break;
-            case 'tan':
-                result = Math.tan(value * (Math.PI / 180));
-                break;
-            case 'log':
-                result = Math.log10(value);
-                break;
-            case '√':
-                result = Math.sqrt(value);
-                break;
-            case '%':
-                result = value / 100;
-                break;
-            default:
-                return;
-        }
-        this.currentOperand = result.toString();
-        this.updateDisplay();
-    }
-
-    compute() {
-        let computation;
-        const prev = parseFloat(this.history);
-        const current = parseFloat(this.currentOperand);
-        if (isNaN(prev) || isNaN(current)) return;
-
-        switch (this.operation) {
-            case '+':
-                computation = prev + current;
-                break;
-            case '-':
-                computation = prev - current;
-                break;
-            case '*':
-                computation = prev * current;
-                break;
-            case '÷':
-                computation = prev / current;
-                break;
-            case '^':
-                computation = Math.pow(prev, current);
-                break;
-            default:
-                return;
-        }
-        this.currentOperand = computation.toString();
-        this.operation = undefined;
-        this.history = '';
-    }
-
-    updateDisplay() {
-        this.currentOperandTextElement.innerText = this.currentOperand;
-        if (this.operation != null) {
-            this.historyTextElement.innerText = `${this.history} ${this.operation}`;
-        } else {
-            this.historyTextElement.innerText = '';
-        }
-    }
+function appendValue(val) {
+  if (expression === '0' && val !== '.') {
+    expression = '';
+  }
+  expression += val;
+  updateDisplay(expression);
 }
 
-const numberButtons = document.querySelectorAll('[data-number]');
-const operationButtons = document.querySelectorAll('[data-operation]');
-const functionButtons = document.querySelectorAll('[data-function]');
-const equalsButton = document.querySelector('[data-equals]');
-const historyTextElement = document.querySelector('.history');
-const currentOperandTextElement = document.querySelector('.current-operand');
+// Mapping for functions with parentheses
+const funcMap = {
+  'sin(': 'Math.sin(',
+  'cos(': 'Math.cos(',
+  'tan(': 'Math.tan(',
+  'log(': 'Math.log10(',
+  'ln(': 'Math.log(',
+  '√(': 'Math.sqrt(',
+  'abs(': 'Math.abs(',
+  'exp(': 'Math.exp(',
+};
 
-const calculator = new Calculator(historyTextElement, currentOperandTextElement);
+function replaceConstants(expr) {
+  return expr
+    .replace(/π/g, 'Math.PI')
+    .replace(/e/g, 'Math.E')
+    .replace(/Ans/g, lastAns)
+    .replace(/÷/g, '/')
+    .replace(/×/g, '*');
+}
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.appendNumber(button.innerText);
-        calculator.updateDisplay();
-    });
+function factorial(n) {
+  if (n < 0) return NaN;
+  if (n === 0 || n === 1) return 1;
+  let res = 1;
+  for (let i = 2; i <= n; i++) res *= i;
+  return res;
+}
+
+// Evaluate expression (with function mapping and factorial)
+function evaluate(expr) {
+  let exp = expr;
+  // Replace functions
+  Object.keys(funcMap).forEach(f => {
+    exp = exp.replaceAll(f, funcMap[f]);
+  });
+  // Replace power operator (^) with Math.pow
+  exp = exp.replace(/(\d+(\.\d+)?)\^(\d+(\.\d+)?)/g, 'Math.pow($1,$3)');
+  // Replace constants
+  exp = replaceConstants(exp);
+
+  // Factorial handling: number! or expression!
+  exp = exp.replace(/([0-9.]+|\([^)]+\))!/g, (match, num) => {
+    try {
+      let value = eval(num);
+      return factorial(value);
+    } catch {
+      return 'NaN';
+    }
+  });
+
+  // Allow commas (for functions like pow(a,b))
+  exp = exp.replace(/,/g, ',');
+
+  try {
+    // eslint-disable-next-line no-eval
+    let result = eval(exp);
+    if (typeof result === 'number' && !isNaN(result)) {
+      lastAns = result;
+      return result;
+    }
+    return 'Error';
+  } catch {
+    return 'Error';
+  }
+}
+
+buttons.addEventListener('click', e => {
+  if (!e.target.classList.contains('btn')) return;
+  const btn = e.target;
+
+  // Number buttons
+  if (btn.hasAttribute('data-num')) {
+    appendValue(btn.getAttribute('data-num'));
+    return;
+  }
+
+  // Operator buttons
+  if (btn.hasAttribute('data-op')) {
+    appendValue(btn.getAttribute('data-op'));
+    return;
+  }
+
+  // Function buttons
+  if (btn.classList.contains('function')) {
+    appendValue(btn.getAttribute('data-func'));
+    return;
+  }
+
+  // Clear button
+  if (btn.id === 'clear') {
+    expression = '';
+    updateDisplay('0');
+    return;
+  }
+
+  // Backspace button
+  if (btn.id === 'backspace') {
+    expression = expression.slice(0, -1);
+    updateDisplay(expression || '0');
+    return;
+  }
+
+  // Ans button
+  if (btn.id === 'ans') {
+    appendValue('Ans');
+    return;
+  }
+
+  // Equals button
+  if (btn.id === 'equals') {
+    if (!expression) return;
+    const result = evaluate(expression);
+    updateDisplay(result);
+    expression = '';
+    return;
+  }
 });
 
-operationButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.chooseOperation(button.innerText);
-        calculator.updateDisplay();
-    });
-});
-
-equalsButton.addEventListener('click', button => {
-    calculator.compute();
-    calculator.updateDisplay();
-});
-
-functionButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const func = button.innerText;
-        if (func === 'C') {
-            calculator.clear();
-        } else if (func === 'DEL') {
-            calculator.delete();
-        } else if (func === 'π') {
-            calculator.currentOperand = Math.PI.toString();
-        } else {
-            calculator.chooseFunction(func);
-        }
-        calculator.updateDisplay();
-    });
-});
-
-
+updateDisplay('0');
