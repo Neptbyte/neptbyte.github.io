@@ -2,38 +2,44 @@
 const hamburger = document.getElementById('hamburger');
 const mainNav = document.getElementById('main-nav');
 
-hamburger.addEventListener('click', () => {
-  mainNav.classList.toggle('active');
-});
+if (hamburger && mainNav) {
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('active');
+  });
 
-// Close nav when clicking outside (mobile)
-document.addEventListener('click', (e) => {
-  if (window.innerWidth <= 700 && mainNav.classList.contains('active')) {
-    if (!mainNav.contains(e.target) && !hamburger.contains(e.target)) {
-      mainNav.classList.remove('active');
+  // Close nav when clicking outside (mobile)
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 700 && mainNav.classList.contains('active')) {
+      if (!mainNav.contains(e.target) && !hamburger.contains(e.target)) {
+        mainNav.classList.remove('active');
+      }
     }
-  }
-});
+  });
+}
 
 // Project search/filter
 const searchInput = document.getElementById('project-search');
 const projectList = document.getElementById('project-list');
-const projectCards = Array.from(projectList.getElementsByClassName('project-card'));
+const projectCards = projectList ? Array.from(projectList.getElementsByClassName('project-card')) : [];
 
-searchInput.addEventListener('input', function() {
-  const query = this.value.toLowerCase();
-  projectCards.forEach(card => {
-    const title = card.querySelector('h3').textContent.toLowerCase();
-    const desc = card.querySelector('p').textContent.toLowerCase();
-    if (title.includes(query) || desc.includes(query)) {
-      card.style.display = '';
-      card.style.opacity = 1;
-    } else {
-      card.style.display = 'none';
-      card.style.opacity = 0;
-    }
+if (searchInput && projectCards.length) {
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    projectCards.forEach(card => {
+      const titleElem = card.querySelector('h3');
+      const descElem = card.querySelector('p');
+      const title = titleElem ? titleElem.textContent.toLowerCase() : '';
+      const desc = descElem ? descElem.textContent.toLowerCase() : '';
+      if (title.includes(query) || desc.includes(query)) {
+        card.style.display = '';
+        card.style.opacity = 1;
+      } else {
+        card.style.display = 'none';
+        card.style.opacity = 0;
+      }
+    });
   });
-});
+}
 
 // Navigation highlight (kept from previous version)
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let index = sections.length;
     while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
     navLinks.forEach(link => link.classList.remove('active'));
-    navLinks[index]?.classList.add('active');
+    if (navLinks[index]) {
+      navLinks[index].classList.add('active');
+    }
   }
   window.addEventListener('scroll', activateNav);
-}); 
+});
