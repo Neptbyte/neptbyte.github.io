@@ -8,6 +8,11 @@ on:
     branches:
       - main # Change this to your default branch if it's not 'main'
 
+# This is the key part of the solution.
+concurrency:
+  group: sitemap-updater
+  cancel-in-progress: true 
+
 # This defines the jobs in your workflow.
 jobs:
   # This is the name of the job.
