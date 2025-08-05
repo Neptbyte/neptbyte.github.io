@@ -1,27 +1,36 @@
+# This is the name of your workflow, which will appear in the "Actions" tab.
 name: Generate Sitemap
 
+# This defines when the workflow will run.
+# In this case, it's triggered on every push to the 'main' branch.
 on:
   push:
     branches:
-      - main # or your main branch name, e.g., master
+      - main # Change this to your default branch if it's not 'main'
 
+# This defines the jobs in your workflow.
 jobs:
+  # This is the name of the job.
   build-and-generate-sitemap:
+    # This specifies the type of machine the job will run on.
     runs-on: ubuntu-latest
+
+    # This is where you add the permissions. It's indented under the job name.
+    # It applies to all steps within this job.
+    permissions:
+      contents: write
+
+    # This is the list of steps that the job will execute.
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # This is crucial for the sitemap action to get the last commit date
+        uses: actions/checkout@v3
 
       - name: Generate sitemap
         uses: cicirello/generate-sitemap@v1
         with:
-          base-url-path: 'https://your-username.github.io/your-repo-name/' # IMPORTANT: Replace with your actual website URL
+          base-url-path: 'https://github.com/Neptbyte/neptbyte.github.io/'
 
       - name: Commit and push sitemap
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'ci: Auto-generate and update sitemap.xml'
-          # This action automatically commits the new sitemap file.
-          # You may need to configure a token for this to work.
+          commit_message: "chore: Auto-generate and update sitemap.xml"
