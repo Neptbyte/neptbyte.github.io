@@ -55,3 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.addEventListener('scroll', activateNav);
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const projectList = document.getElementById('project-list');
+  if (!projectList) return;
+
+  fetch('projects.json')
+    .then(response => response.json())
+    .then(projects => {
+      projectList.innerHTML = '';
+      projects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.innerHTML = `
+          <h3>${project.name}</h3>
+          <p>${project.description}</p>
+          <a href="${project.url}" class="btn" target="_blank" rel="noopener">
+            ${project.external ? 'View on GitHub' : 'Open In Web'}
+          </a>
+        `;
+        projectList.appendChild(card);
+      });
+    })
+    .catch(error => {
+      projectList.innerHTML = '<p>Failed to load projects.</p>';
+      console.error('Error loading projects:', error);
+    });
+});
