@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Awesome Project",
+    "description": "A brief description of your project goes here. Highlight what it does and why it's cool.",
+    "url": "https://github.com/Neptbyte/awesome-project",
+    "external": true
+  },
+  {
+    "name": "Next Big Thing",
+    "description": "Describe another project. You can add as many cards as you like!",
+    "url": "https://github.com/Neptbyte/next-big-thing",
+    "external": true
+  },
+  {
+    "name": "Web-based Scientific Calculator",
+    "description": "This is a Web-based Scientific calculator.",
+    "url": "calculator.html",
+    "external": false
+  }
+]
