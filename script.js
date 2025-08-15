@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <h3>${project.name}</h3>
           <p>${project.description}</p>
           <a href="${project.url}" class="btn" target="_blank" rel="noopener">
-            ${project.external ? 'View on GitHub' : 'Open In Web'}
+            ${project.external ? 'Visit site' : 'Open In Web'}
           </a>
         `;
         projectList.appendChild(card);
